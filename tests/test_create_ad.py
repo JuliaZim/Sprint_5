@@ -1,9 +1,9 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from locators import main_page_locators
-from locators import create_ad_locators
+from ..locators import main_page_locators
+from ..locators import create_ad_locators
 import random
-from locators import profile_page_locators
+from ..locators import profile_page_locators
 
 class TestCreateAd:
     # Создание объявления неавторизованным пользователем

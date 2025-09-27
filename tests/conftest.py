@@ -1,10 +1,11 @@
 from selenium import webdriver
 import pytest
 import random
+from ..locators import login_page_locators
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from locators import login_page_locators
-from locators import registration_page_locators
+from ..locators import login_page_locators
+from ..locators import registration_page_locators
 
 
 # Фикстура для запуска и закрытия браузера

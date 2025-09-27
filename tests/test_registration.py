@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from locators import login_page_locators
-from locators import registration_page_locators
-from locators import main_page_locators
+from ..locators import login_page_locators
+from ..locators import registration_page_locators
+from ..locators import main_page_locators
 import pytest
 import random
 
