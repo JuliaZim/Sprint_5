@@ -15,7 +15,7 @@ class TestRegistration:
         driver = browser
         wait = WebDriverWait(driver, 10)
         # Задаем логин и пароль
-        email = f"test{random.randint(100, 1000)}@test.ru"
+        email = f"test{random.randint(1000, 10000)}@test.ru"
         password = str(random.randint(100000, 1000000))
 
         # Заполняем поля
@@ -63,19 +63,17 @@ class TestRegistration:
 
         # Проверить: поля Email, «Пароль», «Повторите пароль» выделены красным, под полем Email отображается сообщение «Ошибка».
         #  error_text = driver.find_element(*RegistrationPageLocators.ERROR_TEXT_EMAIL)
-        try:
-            error_email = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_EMAIL))
-            error_password_parent = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_PASSWORD))
-            error_submit_password_parent = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_SUBMIT_PASSWORD))
-            error_email_text = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_TEXT_EMAIL))
+
+        error_email = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_EMAIL))
+        error_password_parent = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_PASSWORD))
+        error_submit_password_parent = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_SUBMIT_PASSWORD))
+        error_email_text = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_TEXT_EMAIL))
 
             # Проверяем, что элемент с ошибкой отображается
-            assert error_email.get_attribute("class") == 'input_inputError__fLUP9', "Текст ошибки email не отображается"
-            assert error_password_parent.get_attribute('class') == 'input_inputError__fLUP9', "Поле password не подсвечено красным"
-            assert error_submit_password_parent.get_attribute('class') == 'input_inputError__fLUP9', "Поле submit_password не подсвечено красным"
-            assert error_email_text.is_displayed() and error_email_text.text == 'Ошибка'
-        except Exception as e:
-            pytest.fail(f"Тест не прошел из-за ошибки: {e}")
+        assert error_email.get_attribute("class") == 'input_inputError__fLUP9', "Текст ошибки email не отображается"
+        assert error_password_parent.get_attribute('class') == 'input_inputError__fLUP9', "Поле password не подсвечено красным"
+        assert error_submit_password_parent.get_attribute('class') == 'input_inputError__fLUP9', "Поле submit_password не подсвечено красным"
+        assert error_email_text.is_displayed() and error_email_text.text == 'Ошибка'
 
     # Регистрация уже существующего пользователя
     def test_registration_exist_user(self, browser, registration_new_user):
@@ -109,16 +107,14 @@ class TestRegistration:
          # Кликаем кнопку Создать аккаунт
         browser.find_element(*registration_page_locators.CREATE_ACCOUT_BUTTON).click()
         
-        try:
-            error_email = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_EMAIL))
-            error_password_parent = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_PASSWORD))
-            error_submit_password_parent = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_SUBMIT_PASSWORD))
-            error_email_text = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_TEXT_EMAIL))
+        error_email = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_EMAIL))
+        error_password_parent = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_PASSWORD))
+        error_submit_password_parent = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_SUBMIT_PASSWORD))
+        error_email_text = wait.until(EC.visibility_of_element_located(registration_page_locators.ERROR_TEXT_EMAIL))
 
             # Проверяем, что элемент с ошибкой отображается
-            assert error_email.get_attribute("class") == 'input_inputError__fLUP9', "Текст ошибки email не отображается"
-            assert error_password_parent.get_attribute('class') == 'input_inputError__fLUP9', "Поле password не подсвечено красным"
-            assert error_submit_password_parent.get_attribute('class') == 'input_inputError__fLUP9', "Поле submit_password не подсвечено красным"
-            assert error_email_text.is_displayed() and error_email_text.text == 'Ошибка'
-        except Exception as e:
-            pytest.fail(f"Тест не прошел из-за ошибки: {e}")
+        assert error_email.get_attribute("class") == 'input_inputError__fLUP9', "Текст ошибки email не отображается"
+        assert error_password_parent.get_attribute('class') == 'input_inputError__fLUP9', "Поле password не подсвечено красным"
+        assert error_submit_password_parent.get_attribute('class') == 'input_inputError__fLUP9', "Поле submit_password не подсвечено красным"
+        assert error_email_text.is_displayed() and error_email_text.text == 'Ошибка'
+

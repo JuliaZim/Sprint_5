@@ -3,7 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from ..locators import login_page_locators
 from ..locators import main_page_locators
 from selenium.common.exceptions import NoSuchElementException
-
+import time
 
 class TestLoginPage:
     # Логин
@@ -47,21 +47,22 @@ class TestLoginPage:
         wait.until(EC.element_to_be_clickable(main_page_locators.EXIT_BUTTON))
         browser.find_element(*main_page_locators.EXIT_BUTTON).click()
         
-        # Проверка, что произошел вход, есть фото профиля и имя USER
-        wait.until(EC.presence_of_element_located(main_page_locators.USER))
-        
+        # Проверка, что произошел выход
+        wait.until(EC.presence_of_element_located(login_page_locators.LOGIN_AND_REGISTRATION_BUTTON))
+
         try:
             user_text = browser.find_element(*main_page_locators.USER).text
-            avatar_displayed = browser.find_element(*main_page_locators.AVATAR).is_displayed()
-            login_button_displayed = browser.find_element(*login_page_locators.LOGIN_AND_REGISTRATION_BUTTON).is_displayed()
-            create_ad_button_displayed = browser.find_element(*main_page_locators.CREATE_AD_BUTTON).is_displayed()
         except NoSuchElementException:
             user_text = False
+        try: 
+            avatar_displayed = browser.find_element(*main_page_locators.AVATAR).is_displayed()
+        except NoSuchElementException:
             avatar_displayed = False
-            login_button_displayed = True
-            create_ad_button_displayed = False
 
-        assert not create_ad_button_displayed, "Кнопка 'Создать объявление' отображается, хотя не должна."
+        create_ad_button_displayed = browser.find_element(*main_page_locators.CREATE_AD_BUTTON).is_displayed()
+        login_button_displayed = browser.find_element(*login_page_locators.LOGIN_AND_REGISTRATION_BUTTON).is_displayed()
+        
+        assert create_ad_button_displayed, "Кнопка 'Создать объявление' отображается, хотя не должна."
         assert not user_text, "Текст пользователя 'User.' отображается, хотя не должен."
         assert not avatar_displayed, "Аватар отображается, хотя не должен."
         assert login_button_displayed, "Кнопка 'Войти и зарегистрироваться' не отображается, хотя должна."

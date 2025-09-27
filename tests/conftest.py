@@ -42,7 +42,7 @@ def registration_new_user(browser):
     wait.until(EC.element_to_be_clickable(login_page_locators.NOT_EXIST_ACOUNT_BUTTON))
     # Кликаем на кнопку Нет аккаунта
     browser.find_element(*login_page_locators.NOT_EXIST_ACOUNT_BUTTON).click()
-    email = f"test{random.randint(100, 1000)}@test.ru"
+    email = f"test{random.randint(1000, 10000)}@test.ru"
     password = str(random.randint(100000, 1000000))
     # Заполняем поля
     browser.find_element(
